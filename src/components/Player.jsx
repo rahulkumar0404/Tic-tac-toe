@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Player({ name, symbol, isActive }) {
+export default function Player({ name, symbol, isActive, onchangeName }) {
   const [playerName, setPlayerName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -9,10 +9,13 @@ export default function Player({ name, symbol, isActive }) {
     // update if I written another line with this setIsEditing(!isEditing) it will not get the latest state
     // from the previous state
     setIsEditing((editing) => !editing);
+
+    if(isEditing){
+      onchangeName(symbol, playerName)
+    }
   }
 
   function handleChange(event) {
-    console.log(event);
     setPlayerName(event.target.value);
   }
 
